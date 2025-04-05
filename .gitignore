@@ -1,6 +1,9 @@
 # Node modules
 node_modules/
 
+# Environment variables
+.env
+
 # Logs
 logs/
 *.log
@@ -8,21 +11,25 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables
-.env
-
-# OS-specific
-Thumbs.db
+# OS-generated files
 .DS_Store
+Thumbs.db
 
-# Build directories
-dist/
-build/
-
-# IDE and editor files
+# IDEs
 .vscode/
 .idea/
 
-# Lock files (optional)
+# Build artifacts
+dist/
+build/
+
+# Optional npm cache and debug files
+.npm/
+*.tgz
+
+# Coverage directory used by testing tools
+coverage/
+
+# Optional lock files
 package-lock.json
 yarn.lock
