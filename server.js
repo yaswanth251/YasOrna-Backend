@@ -53,38 +53,32 @@ app.post('/userregister', async (req, res) => {
 // ✅ User Login (POST /login)
 app.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
-        console.log("Login attempt:", email);
-
-        if (!email || !password) {
-            return res.status(400).json({ message: "Email and password required" });
-        }
-
-        const user = await UserModel.findOne({ email });
-        console.log("User found:", user);
-
-        if (!user) {
-            return res.status(401).json({ message: "Invalid email or password" });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        console.log("Password match:", isMatch);
-
-        if (!isMatch) {
-            return res.status(401).json({ message: "Invalid email or password" });
-        }
-
-        res.json({ 
-            message: "Login successful", 
-            name: user.name,  
-            email: user.email  
-        });
-
+      const { email, password } = req.body;
+      console.log("Login request:", req.body);
+  
+      const user = await UserModel.findOne({ email });
+  
+      if (!user) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+  
+      // Success
+      res.json({
+        message: "Login successful",
+        name: user.name,
+        email: user.email
+      });
+  
     } catch (error) {
-        console.error("Login error:", error.message);
-        res.status(500).json({ message: "Login failed", error: error.message });
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Login failed", error: error.message });
     }
-});
+  });
 
 
 
