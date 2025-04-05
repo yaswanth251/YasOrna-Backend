@@ -54,30 +54,38 @@ app.post('/userregister', async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log("Login attempt:", email);
 
-        // Find user by email
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password required" });
+        }
+
         const user = await UserModel.findOne({ email });
+        console.log("User found:", user);
 
         if (!user) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        // Compare passwords
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log("Password match:", isMatch);
+
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
-        // Send only necessary user details (excluding password)
+
         res.json({ 
             message: "Login successful", 
-            name: user.name,  // Ensure user has a name field in DB
+            name: user.name,  
             email: user.email  
         });
 
     } catch (error) {
+        console.error("Login error:", error.message);
         res.status(500).json({ message: "Login failed", error: error.message });
     }
 });
+
 
 
 app.post('/adminregister', async (req, res) => {
