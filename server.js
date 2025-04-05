@@ -17,6 +17,7 @@ mongoose.connect("mongodb+srv://yasorna:yaswanth@cluster0.h4xrzje.mongodb.net/?r
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+
 .then(() => console.log("✅ Database connected"))
 .catch(err => console.log("❌ DB connection error:", err));
 
