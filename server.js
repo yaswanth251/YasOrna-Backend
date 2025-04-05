@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-mongoose.connect("mongodb://localhost:27017/jewelryDb", {
+mongoose.connect("mongodb+srv://yasorna:yaswanth@cluster0.h4xrzje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
