@@ -51,7 +51,7 @@ app.post('/userregister', async (req, res) => {
 
 
 // ✅ User Login (POST /login)
-app.post('/login', async (req, res) => {
+app.post('/userlogin', async (req, res) => {
     try {
       const { email, password } = req.body;
       console.log("Login request:", req.body);
